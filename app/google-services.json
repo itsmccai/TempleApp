@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "648106073794",
+    "project_id": "tiktok-6be6e",
+    "storage_bucket": "tiktok-6be6e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:648106073794:android:f52300dc917cd4d33e655b",
+        "android_client_info": {
+          "package_name": "com.example.tiktok"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxNVPG4FInA02oLV0GDaaF6OYc0-HFoTM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
