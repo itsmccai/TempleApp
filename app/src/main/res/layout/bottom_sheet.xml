@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:backgroundTint="@color/white"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/choose_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Choose from Album"
+        android:padding="12dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/choose_camera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Open Camera"
+        android:padding="12dp"
+        android:textSize="16sp" />
+</LinearLayout>

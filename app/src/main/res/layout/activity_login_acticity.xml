@@ -71,6 +71,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:backgroundTint="@color/temple_red"
             android:id="@+id/sumbit_btn"
             android:layout_margin="12dp"
             android:text="Sign Up"
