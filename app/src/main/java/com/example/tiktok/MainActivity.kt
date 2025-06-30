@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -17,8 +18,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.tiktok.Model.PostModel
 import com.example.tiktok.Util.UiUtil
 import com.example.tiktok.databinding.ActivityMainBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding:ActivityMainBinding
@@ -34,13 +39,38 @@ class MainActivity : AppCompatActivity() {
             if(result.resultCode == RESULT_OK)
             {
                 selectedImgUri = result.data?.data
-                UiUtil.showToast(this, "Got Image" + selectedImgUri.toString())
+                if (selectedImgUri != null) {
+                    val intent = Intent(this, UploadActivity::class.java)
+                    intent.putExtra("imageUri", selectedImgUri.toString())  // to postPage
+                    startActivity(intent)
+                }
             }
 
         }
         enableEdgeToEdge()
         setContentView(binding.root)
+        //post信息区域
+        val samplePosts = listOf(
+            PostModel(R.drawable.logo, "这是第一条内容，我么一起回家吧"),
+            PostModel(R.drawable.logo, "这是第二条内容"),
+            PostModel(R.drawable.logo, "这是第三条内容,原来你也是我哇哦特曼我我我哦我我我我我我我我我我我我我"),
+            PostModel(R.drawable.logo, "这是第二条内容"),
+            PostModel(R.drawable.logo, "这是第二条内容"),
+            PostModel(R.drawable.logo, "这是第二条内容"),
+            PostModel(R.drawable.logo, "这是第二条内容"),
+            PostModel(R.drawable.logo, "这是第二条内容"),
+
+            )
+
+        // 设置 RecyclerView
+        val recyclerView = findViewById<RecyclerView>(R.id.postRecyclerView)
+        //recyclerView.layoutManager = LinearLayoutManager(this)
+        //切换成两列瀑布
+        recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        recyclerView.adapter = PostAdapter(samplePosts)
+
         //按钮绑定
+        //1.添加nav按钮
         binding.navAdd.setOnClickListener{
             val bottomSheetView = layoutInflater.inflate(R.layout.bottom_sheet, null)
             val bottomSheetDialog = com.google.android.material.bottomsheet.BottomSheetDialog(this)
@@ -63,6 +93,17 @@ class MainActivity : AppCompatActivity() {
             }
             bottomSheetDialog.show()
         }
+        //2. 退出按钮
+        val logoutBtn = findViewById<Button>(R.id.btnLogout)
+        logoutBtn.setOnClickListener{
+            //todo：清除登陆信息
+            //
+            startActivity(Intent(this, LoginActicity::class.java))
+            finish()
+        }
+
+
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)

@@ -7,7 +7,30 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!-- Post Area -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/postRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="60dp"
+        android:clipToPadding="false"
+        android:scrollbars="vertical" />
 
+    <!-- Logout Button -->
+
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="12dp" />
+
+
+
+    <!-- bottom nav -->
 
     <LinearLayout
         android:id="@+id/customBottomBar"
@@ -17,6 +40,8 @@
         android:orientation="horizontal"
         android:gravity="center"
         android:layout_alignParentBottom="true">
+
+
 
         <TextView
             android:id="@+id/nav_home"
@@ -28,7 +53,7 @@
             android:textColor="@color/black"/>
 
         <TextView
-            android:id="@+id/nav_hot"
+            android:id="@+id/nav_market"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
