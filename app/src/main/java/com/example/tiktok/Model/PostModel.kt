@@ -6,4 +6,7 @@ data class PostModel(
     val imageResId: Int,
     val description: String,
     val createdTime:  Timestamp = Timestamp.now()  //创建时间戳
+
+    //like button and count
+
 )
