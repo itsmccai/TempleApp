@@ -54,9 +54,9 @@ class MainActivity : AppCompatActivity() {
             replaceFragment(ChatListFragment())
         }
 
-        // binding.navProfile.setOnClickListener {
-        //     replaceFragment(ProfileFragment())
-        // }
+         binding.navProfile.setOnClickListener {
+             replaceFragment(ProfileFragment())
+         }
 
         // ✅ 中间的 + 发帖按钮
         binding.navAdd.setOnClickListener {

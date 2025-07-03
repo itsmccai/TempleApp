@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
-}
+    id("org.jetbrains.kotlin.kapt")}
 
 android {
     namespace = "com.example.tiktok"
@@ -41,12 +41,18 @@ android {
 }
 
 dependencies {
+
+    //Glide
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    kapt("com.github.bumptech.glide:compiler:4.16.0")
+
     // ✅ 使用 firebase BoM 统一版本
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
 
-    // firebase组件
+    // Firebase 模块（不要带版本号）
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation("com.google.firebase:firebase-storage-ktx")
 
 
 

@@ -17,9 +17,9 @@
         <ImageView
             android:id="@+id/postImage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
+            android:layout_margin="8dp"
             android:adjustViewBounds="true"
-            android:maxHeight="400dp"
             android:scaleType="centerCrop" />
 
         <!-- maxLines="2" + ellipsize="end" : 限制最多文字只有两行，超出的部分省略号显示 -->
