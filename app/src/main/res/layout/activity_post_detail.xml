@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/detailScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="12dp"
+    android:background="@android:color/white">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Top -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <!-- avatar -->
+            <ImageView
+                android:id="@+id/userAvatar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/default_avater"
+                android:scaleType="centerCrop"
+                android:layout_alignParentStart="true" />
+
+            <!-- username -->
+            <TextView
+                android:id="@+id/userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UserName"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_toEndOf="@id/userAvatar"
+                android:layout_alignTop="@id/userAvatar"
+                android:layout_marginStart="8dp" />
+
+            <!-- follow button -->
+            <Button
+                android:id="@+id/followButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Follow"
+                android:textSize="12sp"
+                android:backgroundTint="@color/temple_red"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@id/userAvatar" />
+        </RelativeLayout>
+
+
+        <!-- post pic -->
+        <ImageView
+            android:id="@+id/postImage"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:scaleType="fitCenter"
+            android:layout_marginTop="8dp" />
+
+        <!-- post title -->
+        <TextView
+            android:id="@+id/postTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="12dp" />
+
+        <!-- post caption -->
+        <TextView
+            android:id="@+id/postCaption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Caption goes here..."
+            android:textSize="14sp"
+            android:layout_marginTop="4dp" />
+
+        <!-- Reply Area -->
+        <LinearLayout
+            android:id="@+id/commentInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/currentUserAvatar"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/icon_reply"
+                android:scaleType="centerCrop" />
+
+            <EditText
+                android:id="@+id/commentInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:hint="say somthing"
+                android:background="@android:drawable/edit_text"
+                android:padding="8dp" />
+
+            <Button
+                android:id="@+id/sendButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Send"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="@android:color/holo_green_dark"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <!-- comments area -->
+        <TextView
+            android:id="@+id/commentsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="All Comments (0)"
+            android:textStyle="bold"
+            android:layout_marginTop="12dp"
+            android:textSize="14sp" />
+
+        <!-- Comment list -->
+        <LinearLayout
+            android:id="@+id/commentsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="4dp">
+            <!-- 评论项将动态添加进这里 -->
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

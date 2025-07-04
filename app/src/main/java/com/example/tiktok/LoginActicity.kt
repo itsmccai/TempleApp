@@ -17,11 +17,7 @@ import java.util.regex.Pattern
 import com.google.firebase.firestore.ktx.firestore
 import android.content.Intent
 import android.util.Log
-
-
-
-
-
+import com.google.firebase.storage.FirebaseStorage
 
 
 class LoginActicity : AppCompatActivity() {
@@ -35,6 +31,7 @@ class LoginActicity : AppCompatActivity() {
         setContentView(binding.root)
         // 点击注册按钮
         binding.sumbitBtn.setOnClickListener{
+            uploadDefaultAvatarToStorage()
             signup()
         }
         //点击下方文字跳转 登录页面
@@ -51,6 +48,23 @@ class LoginActicity : AppCompatActivity() {
             insets
         }
     }
+    //上传头像：
+    fun uploadDefaultAvatarToStorage() {
+        val storageRef = FirebaseStorage.getInstance().reference
+        val fileRef = storageRef.child("avatars/default_avatar.png")
+        val inputStream = resources.openRawResource(R.drawable.default_avater)
+
+        fileRef.putStream(inputStream)
+            .continueWithTask { fileRef.downloadUrl }
+            .addOnSuccessListener { uri ->
+                Log.d("UPLOAD", "上传成功: $uri")
+                Toast.makeText(this, "链接: $uri", Toast.LENGTH_LONG).show()
+            }
+            .addOnFailureListener {
+                Log.e("UPLOAD", "上传失败: ${it.localizedMessage}")
+            }
+    }
+
 
     //progress bar 加载
     fun setInProgress(inProgress:Boolean){
@@ -98,7 +112,7 @@ class LoginActicity : AppCompatActivity() {
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener {
                 it.user?.let { user ->
-                    val userModel = UserModel(user.uid, email, email.substringBefore("@"))
+                    val userModel = UserModel(user.uid, email, email.substringBefore("@"),"https://firebasestorage.googleapis.com/v0/b/tiktok-6be6e.appspot.com/o/avatars%2Fdefault_avatar.jpg?alt=media")
                     Firebase.firestore.collection("users")
                         .document(user.uid)
                         .set(userModel)

@@ -4,6 +4,7 @@ package com.example.tiktok.Model
 data class UserModel(
     var id:String = "",
     var email:String = "",
+    val avatarUrl: String = "",
     var username:String = "",
     var profilePic:String = "",
     var followerList:MutableList<String> = mutableListOf(),

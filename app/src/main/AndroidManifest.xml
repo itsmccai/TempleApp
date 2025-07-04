@@ -18,6 +18,9 @@
         android:theme="@style/Theme.Tiktok"
         tools:targetApi="31">
         <activity
+            android:name=".Util.PostDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".ChatListActivity"
             android:exported="false" />
         <activity
