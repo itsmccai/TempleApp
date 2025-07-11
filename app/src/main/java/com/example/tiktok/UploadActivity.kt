@@ -15,10 +15,11 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 
 class UploadActivity : AppCompatActivity() {
-    lateinit var binding:ActivityUploadBinding
+    lateinit var binding: ActivityUploadBinding
     private val storageRef = FirebaseStorage.getInstance().reference
     private val db = FirebaseFirestore.getInstance()
     private val currentUser = FirebaseAuth.getInstance().currentUser
+    private var isUploading = false  // 防止重复点击
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,23 +33,23 @@ class UploadActivity : AppCompatActivity() {
         binding.imagePreview.setImageURI(imageUri)
 
         binding.postButton.setOnClickListener {
+            if (isUploading) return@setOnClickListener // 如果正在上传，阻止再次触发
+
             val postTitle = binding.editTitle.text.toString().trim()
             val postCaption = binding.editCaption.text.toString().trim()
 
-            if (postTitle.isNotEmpty() && postCaption.isNotEmpty())
-            {
+            if (postTitle.isNotEmpty() && postCaption.isNotEmpty()) {
+                isUploading = true
+                binding.postButton.isEnabled = false
+                binding.postButton.text = "posting..."
                 uploadToFirebase(imageUri, postTitle, postCaption)
-            }
-            else
-            {
-                Toast.makeText(this, "请输入标题和说明", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "plz fill out the title and caption", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    //functions:
-    fun uploadToFirebase(uri:Uri, title:String, caption:String)
-    {
+    fun uploadToFirebase(uri: Uri, title: String, caption: String) {
         val filename = "posts/${System.currentTimeMillis()}.jpg"
         val fileRef = storageRef.child(filename)
 
@@ -69,13 +70,22 @@ class UploadActivity : AppCompatActivity() {
                 db.collection("posts")
                     .add(post)
                     .addOnSuccessListener {
-                        Toast.makeText(this, "发布成功", Toast.LENGTH_SHORT).show()
-                        finish()  // 返回主页
+                        Toast.makeText(this, "Post Successfully!", Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
+                    .addOnFailureListener {
+                        restoreUI("上传图片成功但写入失败: ${it.message}")
                     }
             }
             .addOnFailureListener {
-                Toast.makeText(this, "上传失败: ${it.message}", Toast.LENGTH_SHORT).show()
+                restoreUI("上传失败: ${it.message}")
             }
+    }
 
+    private fun restoreUI(errorMsg: String) {
+        isUploading = false
+        binding.postButton.isEnabled = true
+        binding.postButton.text = "发布"
+        Toast.makeText(this, errorMsg, Toast.LENGTH_SHORT).show()
     }
 }

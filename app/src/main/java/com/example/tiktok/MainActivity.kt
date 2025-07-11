@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // ✅ 初始化图片/视频选择器
+        //  初始化图片/视频选择器
         imgLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
                 selectedImgUri = result.data?.data
@@ -38,10 +38,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // ✅ 默认加载帖子首页 Fragment
+        //  默认加载帖子首页 Fragment
         replaceFragment(PostFragment())
 
-        // ✅ 底部导航栏点击事件
+        //  底部导航栏点击事件
         binding.navHome.setOnClickListener {
             replaceFragment(PostFragment())
         }
@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
              replaceFragment(ProfileFragment())
          }
 
-        // ✅ 中间的 + 发帖按钮
+        //  中间的 + 发帖按钮
         binding.navAdd.setOnClickListener {
             val bottomSheetView = layoutInflater.inflate(R.layout.bottom_sheet, null)
             val bottomSheetDialog = com.google.android.material.bottomsheet.BottomSheetDialog(this)
@@ -81,19 +81,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // 🔧 fragment 切换函数
+    //  fragment 切换函数
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(binding.fragmentContainer.id, fragment)
             .commit()
     }
 
-    // 🔧 相机打开函数（可填充逻辑）
+    //  相机打开函数（可填充逻辑）
     fun openCamera() {
         // TODO: Add camera intent if needed
     }
 
-    // 🔧 相册打开函数
+    //  相册打开函数
     fun openAlbum() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "*/*"
@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity() {
         imgLauncher.launch(intent)
     }
 
-    // 🔧 权限检查
+    //  权限检查
     fun checkPermissionAndOpenGallery() {
         val readImgPermission: String
         val readVideoPermission: String
