@@ -6,7 +6,7 @@ import com.google.firebase.Timestamp
 import com.google.firebase.firestore.PropertyName
 
 @Parcelize
-data class PostModel(
+data class MarketModel(
     val imageUrl: String = "",
     val title: String = "",
     val caption: String = "",
@@ -16,4 +16,4 @@ data class PostModel(
     @PropertyName("product")
     val isProduct: Boolean = false,
     val price: Double? = null // price
-    ): Parcelable
+): Parcelable

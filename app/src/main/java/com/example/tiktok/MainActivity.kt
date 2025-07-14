@@ -46,9 +46,9 @@ class MainActivity : AppCompatActivity() {
             replaceFragment(PostFragment())
         }
 
-        // binding.navMarket.setOnClickListener {
-        //     replaceFragment(MarketFragment())
-        // }
+         binding.navMarket.setOnClickListener {
+             replaceFragment(MarketFragment())
+         }
 
         binding.navMsg.setOnClickListener {
             replaceFragment(ChatListFragment())

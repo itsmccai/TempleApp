@@ -1,6 +1,7 @@
 package com.example.tiktok
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +24,8 @@ class PostAdapter(private val posts: List<PostModel>) :
          //先找到要卡片中有的布局信息
         val postImage: ImageView = view.findViewById(R.id.postImage)
         val postTitle: TextView = view.findViewById(R.id.postTitle)
+         val priceTag:TextView = view.findViewById(R.id.priceTag)
+
     }
 
     // Create new views (invoked by the layout manager)
@@ -42,6 +45,18 @@ class PostAdapter(private val posts: List<PostModel>) :
             .load(post.imageUrl)
             .into(holder.postImage)
         holder.postTitle.text = post.title
+
+        // 标记为商品时才显示价格
+        if (post.isProduct && post.price != null) {
+            holder.priceTag.text = "¥${post.price}"
+            holder.priceTag.visibility = View.VISIBLE
+        } else {
+            holder.priceTag.visibility = View.GONE
+        }
+
+
+
+
 
         //点击主页的post后跳转其detail页面
         holder.itemView.setOnClickListener{
