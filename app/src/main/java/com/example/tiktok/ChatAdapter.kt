@@ -8,9 +8,11 @@ import com.bumptech.glide.Glide
 import com.example.tiktok.ChatActivity
 import com.example.tiktok.Model.ChatModel
 import com.example.tiktok.databinding.ItemChatBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
-class ChatPreviewAdapter(private val chatList: List<ChatModel>) :
-    RecyclerView.Adapter<ChatPreviewAdapter.ChatViewHolder>() {
+class ChatAdapter(private val chatList: List<ChatModel>) :
+    RecyclerView.Adapter<ChatAdapter.ChatViewHolder>() {
 
     inner class ChatViewHolder(val binding: ItemChatBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -24,7 +26,13 @@ class ChatPreviewAdapter(private val chatList: List<ChatModel>) :
         with(holder.binding) {
             username.text = chat.userName
             lastMessage.text = chat.lastMessage
-            Glide.with(avatar.context).load(chat.avatarUrl).into(avatar)
+            timeText.text = formatTimestamp(chat.timestamp?.toDate()?.time ?: 0L)
+
+            // 圆形头像加载（local resource or url）
+            Glide.with(avatar.context)
+                .load(chat.avatarUrl)
+                .circleCrop()
+                .into(avatar)
 
             root.setOnClickListener {
                 val context = it.context
@@ -38,4 +46,13 @@ class ChatPreviewAdapter(private val chatList: List<ChatModel>) :
     }
 
     override fun getItemCount(): Int = chatList.size
+
+    private fun formatTimestamp(timestamp: Long): String {
+        return try {
+            val sdf = SimpleDateFormat("MM-dd", Locale.getDefault())
+            sdf.format(Date(timestamp))
+        } catch (e: Exception) {
+            ""
+        }
+    }
 }

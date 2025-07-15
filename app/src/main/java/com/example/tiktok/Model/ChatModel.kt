@@ -1,11 +1,14 @@
 package com.example.tiktok.Model
 
 import com.example.tiktok.R
+import com.google.firebase.Timestamp
 
 data class ChatModel(
-    val userId: String = "",
+    val userId: String = "",              // 对方的 userId（用于跳转）
     val userName: String = "",
-    var avatarUrl: Int = R.drawable.default_avatar,
+    val avatarUrl: Int = R.drawable.default_avatar,
     val lastMessage: String = "",
-    val timestamp: Long = 0L
+    val timestamp: Timestamp? = null,
+    val fromId: String = "",              // 当前用户 ID（发起聊天人）
+    val toId: String = ""                 // 对方用户 ID
 )

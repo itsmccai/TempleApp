@@ -47,6 +47,7 @@ dependencies {
 
     //Glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("com.google.firebase:firebase-database-ktx")
     kapt("com.github.bumptech.glide:compiler:4.16.0")
 
     // ✅ 使用 firebase BoM 统一版本

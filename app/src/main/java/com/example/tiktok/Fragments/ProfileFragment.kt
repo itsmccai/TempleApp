@@ -24,7 +24,7 @@ class ProfileFragment : Fragment() {
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-        // ✅ 登出按钮逻辑
+        // 登出按钮
         binding.btnLogout.setOnClickListener {
             auth.signOut()
             val intent = Intent(requireContext(), LoginActicity::class.java)
@@ -32,11 +32,11 @@ class ProfileFragment : Fragment() {
             startActivity(intent)
         }
 
-        // ✅ 初始化瀑布流布局
+        // 初始化瀑布布局
         binding.recyclerMyPosts.layoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
-        // ✅ 加载用户信息和帖子
+        // 加载用户信息和帖子
         loadUserInfo()
         loadUserPosts()
 
@@ -78,7 +78,7 @@ class ProfileFragment : Fragment() {
                 binding.recyclerMyPosts.adapter = PostAdapter(posts)
             }
             .addOnFailureListener {
-                // 可以在这里添加 Toast 或 Log 输出错误信息
+                //
             }
     }
 }

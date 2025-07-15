@@ -73,14 +73,14 @@ class MarketFragment : Fragment() {
     ): View {
         val view = inflater.inflate(R.layout.fragment_market, container, false)
 
-        // 初始化搜索栏和商品列表
+        // serach bar and porductlist
         searchBar = view.findViewById(R.id.search_bar)
         marketRecyclerView = view.findViewById(R.id.marketRecyclerView)
 
-        // 设置竖向商品列表
+        // vertical
         marketRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        // 从 Firebase 加载标记为 product 的商品
+        // load products from firebase
         db.collection("products")
             .orderBy("timestamp", Query.Direction.DESCENDING)
             .get()
@@ -93,7 +93,7 @@ class MarketFragment : Fragment() {
                 marketRecyclerView.adapter = marketAdapter
             }
             .addOnFailureListener {
-                Toast.makeText(requireContext(), "加载商品失败：${it.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "failed to load products：${it.message}", Toast.LENGTH_SHORT).show()
             }
 
         return view

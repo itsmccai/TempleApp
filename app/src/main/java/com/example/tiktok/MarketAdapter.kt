@@ -28,7 +28,7 @@ class MarketAdapter(private var itemList: List<MarketModel>) :
             itemDescription.text = item.caption
             Glide.with(itemImage.context).load(item.imageUrl).into(itemImage)
 
-            // 喜欢按钮逻辑（保持不变）
+            // like button
             likeIcon.setImageResource(R.drawable.unliked_market)
             likeIcon.tag = false
             likeIcon.setOnClickListener {
@@ -39,11 +39,11 @@ class MarketAdapter(private var itemList: List<MarketModel>) :
                 it.tag = !isLiked
             }
 
-            // ⭐ 点击整张卡片跳转到详情页
+            // 点击整张卡片跳转到详情页
             root.setOnClickListener {
                 val context = holder.itemView.context
                 val intent = Intent(context, PostDetailActivity::class.java)
-                intent.putExtra("post", item)  // MarketModel implements Parcelable
+                intent.putExtra("post", item)
                 context.startActivity(intent)
             }
         }
