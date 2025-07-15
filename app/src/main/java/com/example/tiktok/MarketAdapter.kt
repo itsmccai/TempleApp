@@ -48,6 +48,10 @@ class MarketAdapter(private var itemList: List<MarketModel>) :
             }
         }
     }
+    fun updateList(newList: List<MarketModel>) {
+        itemList = newList
+        notifyDataSetChanged()
+    }
 
     override fun getItemCount(): Int = itemList.size
 }
