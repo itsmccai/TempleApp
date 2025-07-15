@@ -39,7 +39,7 @@ class MarketAdapter(private var itemList: List<MarketModel>) :
                 it.tag = !isLiked
             }
 
-            // 点击整张卡片跳转到详情页
+            // jump to detail
             root.setOnClickListener {
                 val context = holder.itemView.context
                 val intent = Intent(context, PostDetailActivity::class.java)

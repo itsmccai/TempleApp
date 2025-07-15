@@ -57,7 +57,7 @@ class PostDetailActivity : AppCompatActivity() {
             } else null
 
             if (isProduct && price != null) {
-                binding.postCaption.text = "$caption\n\n价格：¥$price"
+                binding.postCaption.text = "$caption\n\nPrice：¥$price"
             }
 
             val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
@@ -109,7 +109,7 @@ class PostDetailActivity : AppCompatActivity() {
                                 .document(currentUserId + "_" + userId)
                                 .set(chatForCurrent)
 
-                            // 对方的聊天列表（可选）
+                            // 对方的聊天列表
                             db.collection("chatList")
                                 .document(userId + "_" + currentUserId)
                                 .set(chatForTarget)

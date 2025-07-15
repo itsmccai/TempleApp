@@ -130,7 +130,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginTop="4dp">
-            <!-- 评论项将动态添加进这里 -->
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
