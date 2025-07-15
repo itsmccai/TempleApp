@@ -68,6 +68,7 @@ class MarketFragment : Fragment() {
             MarketModel(
                 title = "Latest Jacket",
                 caption = "Warm and cozy",
+                localImageResId = R.drawable.jacket,
                 price = 3200.0,
                 isProduct = true
             ),
@@ -80,18 +81,19 @@ class MarketFragment : Fragment() {
             MarketModel(
                 title = "Bape Hoodie",
                 caption = "Brand New",
-                imageUrl = "d",
+                localImageResId = R.drawable.bape,
                 price = 3000.0,
                 isProduct = true
             ),
             MarketModel(
                 title = "Gaming Keyboard",
                 caption = "RGB lighting",
+                localImageResId = R.drawable.keyboard,
                 price = 4900.0,
                 isProduct = true
             )
-
         )
+
 
 
         latestAdapter = LatestMarketAdapter(latestDummy)

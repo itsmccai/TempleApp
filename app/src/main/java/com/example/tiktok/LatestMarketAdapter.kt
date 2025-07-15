@@ -21,31 +21,45 @@ class LatestMarketAdapter(private var itemList: List<MarketModel>) :
     override fun onBindViewHolder(holder: LatestMarketViewHolder, position: Int) {
         val item = itemList[position]
         with(holder.binding) {
-            // Existing code
             itemTitle.text = item.title
             itemPrice.text = "¥${item.price ?: 0.0}"
-            Glide.with(itemImage.context).load(item.imageUrl).into(itemImage)
 
-            // NEW: setup heart icon toggle
-            likeIcon.setImageResource(R.drawable.unliked_market)  // default unliked
-            likeIcon.tag = false  // false means unliked state
+            //
+            val context = itemImage.context
+            when {
+                item.localImageResId != null -> {
+                    Glide.with(context)
+                        .load(item.localImageResId)
+                        .into(itemImage)
+                }
+                item.imageUrl.isNotEmpty() -> {
+                    Glide.with(context)
+                        .load(item.imageUrl)
+                        .placeholder(R.drawable.placeholder)
+                        .into(itemImage)
+                }
+                else -> {
+                    Glide.with(context)
+                        .load(R.drawable.placeholder)
+                        .into(itemImage)
+                }
+            }
+
+            //
+            likeIcon.setImageResource(R.drawable.unliked_market)
+            likeIcon.tag = false
 
             likeIcon.setOnClickListener {
                 val isLiked = it.tag as Boolean
                 if (isLiked) {
-                    likeIcon.setImageResource(R.drawable.unliked_market)  // unliked
+                    likeIcon.setImageResource(R.drawable.unliked_market)
                 } else {
-                    likeIcon.setImageResource(R.drawable.like_market)  // liked
+                    likeIcon.setImageResource(R.drawable.like_market)
                 }
                 it.tag = !isLiked
             }
         }
     }
 
-
     override fun getItemCount(): Int = itemList.size
-
-
-
 }
-
